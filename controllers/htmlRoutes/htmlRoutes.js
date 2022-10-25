@@ -1,5 +1,28 @@
 const router = require(`express`).Router();
-const { Post, Comment, User } = require(`../../models`)
+const { Post, Comment, User } = require(`../../models`);
+const { findByPk } = require("../../models/Comments");
+
+router.get(`/dashboard:id`, async (req, res) =>{
+    try{
+        const data = await findByPk({raw: true, where: req.params.id});
+        if(!data){
+            res.status(300).json("No post found.");
+        }else{
+            res.status(200).render(`dashboard`, { data });
+        };
+    }catch(err){
+        res.status(500).json(err);
+    };
+});
+
+router.get(`/login`, (req, res) => {
+    res.status(200).render(`login`);
+});
+
+router.get(`/signup`, (req, res) => {
+    res.status(200).render(`signUp`);
+});
+
 router.get(`/`, async (req,res) =>{
     try{
         const data = await Post.findAll({raw: true})
@@ -7,7 +30,8 @@ router.get(`/`, async (req,res) =>{
     } catch (err){
         res.status(500).json(err);
     };
-})
+});
+
 
 
 module.exports = router;

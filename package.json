@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/unheardof77/Tech-Blog/issues"
   },
-  "homepage": "https://github.com/unheardof77/Tech-Blog#readme"
+  "homepage": "https://github.com/unheardof77/Tech-Blog#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.1"
+  }
 }

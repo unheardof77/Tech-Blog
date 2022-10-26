@@ -1,7 +1,8 @@
 const router = require(`express`).Router();
 const { Post, Comment, User } = require(`../../models`);
+const verification = require(`../../utils/middleWare`);
 
-router.get(`/dashboard:id`, async (req, res) =>{
+router.get(`/dashboard`, verification, async (req, res) =>{
     try{
         const data = await Post.findByPk({raw: true, where: req.params.id});
         if(!data){

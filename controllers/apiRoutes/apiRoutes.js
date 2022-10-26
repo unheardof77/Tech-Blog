@@ -17,7 +17,7 @@ router.post(`/login`, async (req, res) =>{
         if(!userData) return res.status(404).json("Incorrect username, email or password.");
 
         const password = await userData.checkPassword(req.body.password);
-        if(!password) return res.status(404).json("Incorrect username, email or password.");
+        if(!password) return res.status(404).json("Incorrect username, email or password!");
 
         req.session.save(() =>{
             req.session.userId = userData.id;

@@ -4,7 +4,7 @@ const verification = require(`../../utils/middleWare`);
 
 router.get(`/dashboard`, verification, async (req, res) =>{
     try{
-        const data = await Post.findByPk({raw: true, where: req.params.id});
+        const data = await Post.findByPk({raw: true, where: req.session.userId});
         if(!data){
             res.status(300).json("No post found.");
         }else{

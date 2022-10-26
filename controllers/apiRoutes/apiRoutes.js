@@ -1,5 +1,6 @@
 const router = require(`express`).Router();
 const { Post, Comment, User} = require(`../../models`);
+const verification = require(`../../utils/middleWare`)
 
 
 router.post(`/signup`, async (req, res) => {
@@ -27,7 +28,7 @@ router.post(`/login`, async (req, res) =>{
     } catch(err){
         res.status(500).json(err)
     };
-})
+});
 
 router.post(`/logout`, async (req, res) => {
     try{
@@ -39,6 +40,54 @@ router.post(`/logout`, async (req, res) => {
             res.status(404).end();
         };
     }catch(err){
+        res.status(500).json(err);
+    };
+});
+
+router.post(`/createpost`, verification, async (req, res) =>{
+    try{
+        const data = await Post.create({
+            user_id: req.session.userId,
+            post_title: req.body.post_title,
+            post_message: req.body.post_message,
+            time: req.body.time
+        });
+        if(data){
+            res.status(200).json("Created post.");
+        }else {
+            res.status(500).json("Unable to create post.");
+        };
+    }catch(err){
+        res.status(500).json(err)
+    };
+});
+
+router.post(`/createcomment`, verification, async (req, res) =>{
+    try{
+        const data = await Comment.create({
+            user_id: req.session.userId,
+            post_id: req.body.post_id,
+            comment: req.body.comment
+        });
+        if(!data){
+            res.status(500).json("Could not create comment.");
+        }else{
+            res.status(200).json(data);
+        };
+    }catch (err){
+        res.status(500).json(err);
+    };
+})
+
+router.put(`/updatepost`, verification, async (req, res) =>{
+    try{
+        const data = await Post.update(req.body, {where: {id: req.body.post}});
+        if(!data){
+            res.status(500).json("Could not update post.");
+        }else{
+            res.status(200).json(data);
+        };
+    }catch (err){
         res.status(500).json(err);
     };
 })

@@ -21,15 +21,11 @@ Post.init(
         post_message:{
             type: DataTypes.STRING,
             allowNull:false
-        },
-        time: {
-            type: DataTypes.DATE,
-            allowNull: false
         }
     },
     {
         sequelize,
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true,
         underscored: false,
         modelName: 'post'

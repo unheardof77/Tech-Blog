@@ -11,7 +11,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "tailwindcss build -i ./src/css/tailwind.css -o ./public/style/tailwind.css"
+    "build": "tailwindcss build -i ./src/css/tailwind.css -o ./public/style/tailwind.css",
+    "seed": "node seeds/index.js"
   },
   "name": "tech-blog",
   "description": "This is a tech blog site where people can make post.",

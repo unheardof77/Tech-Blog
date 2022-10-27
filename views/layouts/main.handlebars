@@ -10,17 +10,21 @@
 <body>
     <header class="bg-indigo-500 flex justify-between items-center  w-full">
         <nav class="ml-5">
-            <a class="bg-blue-500 mt-6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Home</a>
-            <a class="bg-blue-500 mt-6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dashboard</a>
+            <a href="/" class="bg-blue-500 mt-6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Home</a>
+            <a href="/dashboard" class="bg-blue-500 mt-6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dashboard</a>
         </nav>
         <h1 class="bg-blue-500 text-white font-bold p-5 rounded w-auto">The Tech Blog</h1>
         <nav class="mr-5">
-            <a class="bg-blue-500 mt-6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">LogIn</a>
+            {{#if loggedIn}}
+            <a href="/api/logout" class="bg-blue-500 mt-6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Log out</a>
+            {{else}}
+            <a href="/login" class="bg-blue-500 mt-6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">LogIn</a>
+            {{/if}}
         </nav>
     </header>
-    <section class="bg-slate-500 mx min-h-screen mx-80 ">
+    <main class="bg-slate-500 mx min-h-screen mx-80 ">
         {{{body}}}
-    </section>
+    </main>
 </body>
     <footer class="bg-indigo-500 flex justify-between bottom-0  w-full">
         <ul class="text-white font-bold">

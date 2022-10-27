@@ -25,11 +25,12 @@ router.get(`/signup`, (req, res) => {
 
 router.get(`/`, async (req,res) =>{
     try{
-        const data = await Post.findAll({raw: true, include: [{model: "Comment"}]});
+        const data = await Post.findAll({raw: true, include: [{model: Comment}]});
         res.status(200).render(`home`, {data});
     } catch (err){
-        res.status(500).json(err);
+        res.status(500).json("hello");
     };
+    
 });
 
 

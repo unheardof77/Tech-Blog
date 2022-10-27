@@ -4,8 +4,7 @@ const verification = require(`../../utils/middleWare`);
 
 router.get(`/dashboard`, verification, async (req, res) =>{
     try{
-        console.log(req.session.userId)
-        let data = await Post.findByPk({where: {id: req.session.userId}});
+        let data = await Post.findAll({where: {user_id: req.session.userId}});
         data = data.map((data) => data.get({plain: true}))
         if(!data){
             res.status(300).json("No post found.");
@@ -17,12 +16,20 @@ router.get(`/dashboard`, verification, async (req, res) =>{
     };
 });
 
-router.get(`/login`, (req, res) => {
-    res.status(200).render(`login`);
+router.get(`/login`, async (req, res) => {
+    try{
+        res.status(200).render(`login`);
+    }catch(err){
+        res.status(500).json(err);
+    };
 });
 
-router.get(`/signup`, (req, res) => {
-    res.status(200).render(`signUp`);
+router.get(`/signup`, async (req, res) => {
+    try{
+        res.status(200).render(`signUp`);
+    }catch(err){
+        res.status(500).json(err);
+    };
 });
 
 router.get(`/`, async (req,res) =>{

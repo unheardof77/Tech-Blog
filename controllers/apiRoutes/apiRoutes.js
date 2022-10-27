@@ -15,11 +15,6 @@ router.post(`/signup`, async (req, res) => {
 router.post(`/login`, async (req, res) =>{
     try{
         const userData = await User.findOne({ where: {username: req.body.username}});
-        console.log("------------")
-        console.log(userData)
-        console.log(userData.password)
-        console.log(userData.dataValues)
-        console.log("/n")
         if(!userData) return res.status(404).json("Incorrect username, email or password.");
 
         const password = await userData.checkPassword(req.body.password);
@@ -50,7 +45,7 @@ router.post(`/logout`, async (req, res) => {
         res.status(500).json(err);
     };
 });
-
+//All above works ------------------------------------------------- Below needs to be tested
 router.post(`/createpost`, verification, async (req, res) =>{
     try{
         const data = await Post.create({

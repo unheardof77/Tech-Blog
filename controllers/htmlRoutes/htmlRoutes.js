@@ -4,7 +4,9 @@ const verification = require(`../../utils/middleWare`);
 
 router.get(`/dashboard`, verification, async (req, res) =>{
     try{
-        const data = await Post.findByPk({raw: true, where: req.session.userId});
+        console.log(req.session.userId)
+        let data = await Post.findByPk({where: {id: req.session.userId}});
+        data = data.map((data) => data.get({plain: true}))
         if(!data){
             res.status(300).json("No post found.");
         }else{
@@ -27,7 +29,7 @@ router.get(`/`, async (req,res) =>{
     try{
         const data = await Post.findAll({raw: true});
         console.log(data);
-        res.status(200).render(`home`, {data});
+        res.status(200).render(`home`, {data, loggedIn: req.session.loggedIn});
     } catch (err){
         res.status(500).json("hello");
     };

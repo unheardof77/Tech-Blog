@@ -15,8 +15,7 @@ async function formHandler (e) {
         location.replace(`/`);
     } else {
         data = await data.json();
-        console.log(data);
-        alert(data)
+        alert(data);
     }
 };
 

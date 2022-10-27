@@ -1,9 +1,15 @@
     <section>
         <h1>Your Post's:</h1>
-        <section>
             {{#each data}}
-                {{>blog}}
+            <section>
+                <article>
+                    <div>
+                        <h1>{{post_title}}</h1>
+                        <p></p>
+                    </div>
+                    <p>{{post_message}}</p>
+                </article>
                 <button>Edit Post</button>
+            </section>
             {{/each}}
-        </section>
     </section>

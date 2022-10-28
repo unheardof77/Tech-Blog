@@ -1,4 +1,9 @@
     <section>
+        <form id="form">
+            <input placeholder="Title" id="title">
+            <textarea placeholder="Blog content" id="txtArea" cols="5"></textarea>
+            <button id="formButton" type="submit" >Create Post</button>
+        </form>
         <h1>Your Post's:</h1>
             {{#each data}}
             <section id="{{id}}">
@@ -9,7 +14,15 @@
                     </div>
                     <p>{{post_message}}</p>
                 </article>
-                <button class="postEditButton">Edit Post</button>
+                <div>
+                    <button data-id="{{id}}" class="postEditButton">Edit Post</button>
+                </div>
             </section>
+
             {{/each}}
+            <div></div>
     </section>
+    {{#if data}}
+    <script src="/script/updatePost.js" ></script>
+    {{/if}}
+    <script src="/script/makePost.js" ></script>

@@ -9,7 +9,7 @@
             <p>{{post_message}}</p>
         </article>
         <section>
-        {{#each comment}}
+        {{#each comments}}
             <div>
                 <h3>{{user.name}}</h3>
                 <p>{{comment}}</p>
@@ -19,7 +19,7 @@
         </section>
         {{#if ../loggedIn}}
         <input>
-        <button class="addCommentButton">Add comment</button>
+        <button data-postId="{{id}}" class="addCommentButton">Add comment</button>
         {{/if}}
     </section>
     {{/each}}

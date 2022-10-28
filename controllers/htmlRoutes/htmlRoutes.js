@@ -45,6 +45,7 @@ router.get(`/`, async (req,res) =>{
         ]
         });
         const data = oldData.map((data) => data.get({plain: true}));
+        console.log(data)
         res.status(200).render(`home`, {data, loggedIn: req.session.loggedIn});
     } catch (err){
         res.status(500).json("hello");

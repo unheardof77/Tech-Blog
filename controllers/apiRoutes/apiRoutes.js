@@ -52,7 +52,6 @@ router.post(`/createpost`, verification, async (req, res) =>{
             user_id: req.session.userId,
             post_title: req.body.post_title,
             post_message: req.body.post_message,
-            time: req.body.time
         });
         if(data){
             res.status(200).json("Created post.");
@@ -83,13 +82,20 @@ router.post(`/createcomment`, verification, async (req, res) =>{
 
 router.put(`/updatepost`, verification, async (req, res) =>{
     try{
-        const data = await Post.update(req.body, {where: {id: req.body.post}});
+        console.log(req.body)
+        const data = await Post.update({
+            user_id: req.session.userId,
+            post_title: req.body.post_title,
+            post_message: req.body.post_message
+        }, {where: {id: req.body.post_id}});
+        console.log(data);
         if(!data){
             res.status(500).json("Could not update post.");
         }else{
             res.status(200).json(data);
         };
     }catch (err){
+        throw err
         res.status(500).json(err);
     };
 })
